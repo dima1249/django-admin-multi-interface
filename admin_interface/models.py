@@ -31,8 +31,37 @@ class ThemeQuerySet(models.QuerySet):
 
         return obj
 
+class AdminSite(models.Model):
+    name = models.CharField(
+        unique=True,
+        max_length=50,
+        default="Tapatrip",
+        verbose_name="Admin name",
+    )
+    cache_name = models.CharField(
+        unique=True,
+        max_length=50,
+        default="tapatrip",
+        verbose_name="Cache name",
+    )
+
+    class Meta:
+        app_label = "admin_interface"
+        verbose_name = _("Admin Site")
+        verbose_name_plural = _("Admin Sites")
+
+    def __str__(self):
+        return self.name
 
 class Theme(models.Model):
+    admin_site = models.ForeignKey(
+        "admin_interface.AdminSite",
+        on_delete=models.CASCADE,
+        verbose_name="Admin Name",
+        null=True,
+        blank=True
+    )
+
     name = models.CharField(
         unique=True,
         max_length=50,
