@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 
 from admin_interface.models import Theme, AdminSite
 
-
 @admin.register(AdminSite)
 class AdminSiteAdmin(admin.ModelAdmin):
     list_display = (
@@ -126,6 +125,7 @@ class ThemeAdmin(admin.ModelAdmin):
                 "fields": (
                     "css_generic_link_color",
                     "css_generic_link_hover_color",
+                    "css_generic_link_active_color",
                 ),
             },
         ),
@@ -151,7 +151,13 @@ class ThemeAdmin(admin.ModelAdmin):
                 ),
             },
         ),
-        (_("Navigation Bar"), {"classes": ("wide",), "fields": ("foldable_apps",)}),
+        (
+            _("Navigation Bar"),
+            {
+                "classes": ("wide",),
+                "fields": ("foldable_apps",),
+            },
+        ),
         (
             _("Related Modal"),
             {
@@ -198,8 +204,23 @@ class ThemeAdmin(admin.ModelAdmin):
             },
         ),
         (
+            _("Inlines"),
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "collapsible_stacked_inlines",
+                    "collapsible_stacked_inlines_collapsed",
+                    "collapsible_tabular_inlines",
+                    "collapsible_tabular_inlines_collapsed",
+                ),
+            },
+        ),
+        (
             _("Recent Actions"),
-            {"classes": ("wide",), "fields": ("recent_actions_visible",)},
+            {
+                "classes": ("wide",),
+                "fields": ("recent_actions_visible",),
+            },
         ),
     )
 
